@@ -45,18 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private class GetItemsAsync extends AsyncTask<Void, Void, HashMap<String, BigDecimal>> {
-        @Override
-        protected void onPostExecute(HashMap<String, BigDecimal> itemsHash) {
-            /*
-            * on post execute, the background execution is finished
-            * so we can communicate with the UI main thread again
-            * */
-            btnClick.setText("Click me");
-            adapter = new ListViewAdapter(itemsHash, context);
-            itemsList.setAdapter(adapter);
-            isGettingData = false;
-            super.onPostExecute(itemsHash);
-        }
+
 
         @Override
         protected void onPreExecute() {
@@ -84,6 +73,19 @@ public class MainActivity extends AppCompatActivity {
 
             }
             return GetRandomItems();
+        }
+
+        @Override
+        protected void onPostExecute(HashMap<String, BigDecimal> itemsHash) {
+            /*
+            * on post execute, the background execution is finished
+            * so we can communicate with the UI main thread again
+            * */
+            btnClick.setText("Click me");
+            adapter = new ListViewAdapter(itemsHash, context);
+            itemsList.setAdapter(adapter);
+            isGettingData = false;
+            super.onPostExecute(itemsHash);
         }
     }
 
